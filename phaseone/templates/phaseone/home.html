@@ -1,0 +1,18 @@
+{% extends "./layout.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+	{% if user.is_authenticated %}
+		<p>Welcome, {{ user.username }}. Thanks for logging in.</p>
+		<form method="post" enctype="multipart/form-data"> 
+			{% csrf_token %} 
+			{{ form|crispy }} 
+			<button type="submit" class="btn btn-success">Submit</button> 
+		</form> 
+		<p>goodbye, {{ user.username }}. <a href="/logout"> log out</a>.</p>
+	{% else %}
+  		<p>Welcome,User. Please <a href="/login"> log in</a>.</p>
+	{% endif %}
+
+{% endblock %}
